@@ -1,6 +1,6 @@
 import { ReactElement, Ref, cloneElement } from 'react';
 import { createPortal } from 'react-dom';
-import { getPopupRoot, usePopupTrigger } from './popup-impl';
+import { getPopupRoot, usePopupTrigger } from '../popup-impl';
 import { Recipe } from './recipe';
 
 export interface Props {

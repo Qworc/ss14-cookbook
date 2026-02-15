@@ -1,21 +1,21 @@
 import { ReactElement, ReactNode, RefObject, memo, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
-import { Entity, Recipe as RecipeData } from '../types';
-import { useGameData } from './context';
-import { FavoriteButton, useIsFavorite } from './favorites';
-import { CloseIcon, FoodSequenceIcon, NodeTreeIcon } from './icons';
-import { getPopupRoot, usePopupTrigger } from './popup-impl';
-import { useCurrentExploredRecipe, useExploreRecipe } from './recipe-explorer';
-import { RecipeIngredients } from './recipe-ingredients';
-import { RecipeInstructions } from './recipe-instructions';
-import { RecipeMethod } from './recipe-method';
-import { RecipeResult } from './recipe-result';
-import { RecipeTraits } from './recipe-traits';
-import { useRecipeVisibility } from './recipe-visibility-context';
-import { EntitySprite } from './sprites';
-import { Tooltip } from './tooltip';
-import { useUrl } from './url';
+import { Entity, Recipe as RecipeData } from '../../types';
+import { useGameData } from '../context';
+import { FavoriteButton, useIsFavorite } from '../favorites';
+import { CloseIcon, FoodSequenceIcon, NodeTreeIcon } from '../icons';
+import { getPopupRoot, usePopupTrigger } from '../popup-impl';
+import { useCurrentExploredRecipe, useExploreRecipe } from '../recipe-explorer';
+import { EntitySprite } from '../sprites';
+import { Tooltip } from '../tooltip';
+import { useUrl } from '../url';
+import { RecipeIngredients } from './ingredients';
+import { RecipeInstructions } from './instructions';
+import { RecipeMethod } from './method';
+import { RecipeResult } from './result';
+import { RecipeTraits } from './traits';
+import { useRecipeVisibility } from './visibility-context';
 
 export interface Props {
   className?: string;

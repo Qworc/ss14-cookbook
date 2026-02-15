@@ -21,8 +21,7 @@ import {
   SortIcon,
 } from '../icons';
 import { InputGroup } from '../input-group';
-import { Recipe } from '../recipe';
-import { RecipeVisibilityProvider } from '../recipe-visibility-context';
+import { Recipe, RecipeVisibilityProvider } from '../recipe';
 import {
   chainCompare,
   compareByFav,
