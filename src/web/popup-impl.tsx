@@ -162,10 +162,10 @@ const blur = (e: FocusEvent): void => {
 
 const register = (inst: PopupInstance): void => {
   if (popups.size === 0) {
-    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mousemove', mouseMove, { passive: true });
     window.addEventListener('focusin', focus);
     window.addEventListener('focusout', blur);
-    window.addEventListener('scroll', leave);
+    window.addEventListener('scroll', leave, { passive: true });
   }
   popups.set(inst.trigger, inst);
 };
