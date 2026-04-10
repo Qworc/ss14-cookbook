@@ -227,7 +227,7 @@ delta-v:
   ignoredFoodSequenceElements: *ignoredFoodSequenceElements
   ignoreSourcesOf: *ignoredSources
   forceIncludeReagentSources: *reagentSources
-  spriteOffsets: *legacySpriteOffsets
+  spriteOffsets: *standardSpriteOffsets
 
 rmc-14:
   name: "RMC-14"
