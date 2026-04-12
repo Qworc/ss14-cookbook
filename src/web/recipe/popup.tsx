@@ -1,6 +1,5 @@
-import { ReactElement, Ref, cloneElement } from 'react';
-import { createPortal } from 'react-dom';
-import { getPopupRoot, usePopupTrigger } from '../popup-impl';
+import { cloneElement, ReactElement, Ref } from 'react';
+import { Popup, usePopupTrigger } from '../popup';
 import { Recipe } from './recipe';
 
 export interface Props {
@@ -11,22 +10,23 @@ export interface Props {
 }
 
 export const RecipePopup = ({ id, children }: Props): ReactElement => {
-  const { visible, popupRef, parentRef } = usePopupTrigger<HTMLDivElement>(
-    'below'
-  );
+  const popup = usePopupTrigger();
 
   const childWithRef = cloneElement(children, {
-    ref: parentRef,
+    ref: popup.triggerRef,
   });
 
   return <>
     {childWithRef}
-    {visible && createPortal(
-      <div className='popup popup--recipe' ref={popupRef}>
+    <Popup
+      {...popup}
+      placement='below'
+      interactive
+    >
+      <div className='popup_recipe'>
         {typeof id === 'string' ? renderRecipe(id) : id.map(renderRecipe)}
-      </div>,
-      getPopupRoot()
-    )}
+      </div>
+    </Popup>
   </>;
 };
 

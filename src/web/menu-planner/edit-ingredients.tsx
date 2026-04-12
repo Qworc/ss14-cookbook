@@ -1,9 +1,8 @@
 import { ReactElement, memo, useMemo } from 'react';
-import { createPortal } from 'react-dom';
 import { useGameData } from '../context';
 import { NeutralCollator, dedupe } from '../helpers';
 import { AddIcon, EyeIcon, EyeOffIcon, InformationIcon } from '../icons';
-import { getPopupRoot, usePopupTrigger } from '../popup-impl';
+import { Popup, usePopupTrigger } from '../popup';
 import { Recipe } from '../recipe';
 import { getRecipeName } from '../sort';
 import { EntitySprite, ReagentSprite } from '../sprites';
@@ -154,10 +153,7 @@ const AddRecipeButton = memo(({
   totalCount,
   onAdd,
 }: AddRecipeButtonProps): ReactElement => {
-  const { parentRef, popupRef, visible } = usePopupTrigger<
-    HTMLDivElement,
-    HTMLButtonElement
-  >('above');
+  const popup = usePopupTrigger<HTMLButtonElement>();
 
   const n = index + 1;
 
@@ -170,19 +166,18 @@ const AddRecipeButton = memo(({
       className='planner_editor-ingredient-add-recipe'
       aria-label={ariaLabel}
       onClick={() => onAdd(recipeId)}
-      ref={parentRef}
+      ref={popup.triggerRef}
     >
       <AddIcon/>
       {totalCount > 1 && <span>{n}</span>}
     </button>
-    {visible && createPortal(
-      <div className='popup popup--recipe' ref={popupRef}>
+    <Popup {...popup} interactive>
+      <div className='popup_recipe'>
         <Recipe id={recipeId} canFavorite={false} canExplore={false}/>
-        <span className='popup--tooltip'>
+        <span className='popup_tooltip'>
           Add this recipe to the menu.
         </span>
-      </div>,
-      getPopupRoot()
-    )}
+      </div>
+    </Popup>
   </>;
 });

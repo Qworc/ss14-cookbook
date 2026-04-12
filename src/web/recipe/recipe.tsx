@@ -1,11 +1,17 @@
-import { ReactElement, ReactNode, RefObject, memo, useMemo, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import {
+  memo,
+  ReactElement,
+  ReactNode,
+  RefObject,
+  useMemo,
+  useRef,
+} from 'react';
 import { Link } from 'react-router';
 import { Entity, Recipe as RecipeData } from '../../types';
 import { useGameData } from '../context';
 import { FavoriteButton, useIsFavorite } from '../favorites';
 import { CloseIcon, FoodSequenceIcon, NodeTreeIcon } from '../icons';
-import { getPopupRoot, usePopupTrigger } from '../popup-impl';
+import { Popup, usePopupTrigger } from '../popup';
 import { useCurrentExploredRecipe, useExploreRecipe } from '../recipe-explorer';
 import { EntitySprite } from '../sprites';
 import { Tooltip } from '../tooltip';
@@ -162,32 +168,28 @@ const SeqElemIcon = memo(({
   seqElem,
   seqEnd,
 }: SeqElemIconProps): ReactElement => {
-  const tooltipContent = useMemo(() => <>
-    {seqElem && <>
-      <p>You can put this food inside:</p>
-      <SeqElemList sequences={seqElem}/>
-    </>}
-    {seqEnd && <>
-      <p>This food can finish off:</p>
-      <SeqElemList sequences={seqEnd}/>
-    </>}
-  </>, [seqElem, seqEnd]);
+  const tooltipContent = useMemo(() => (
+    <div className='popup_foodseq'>
+      {seqElem && <>
+        <p>You can put this food inside:</p>
+        <SeqElemList sequences={seqElem}/>
+      </>}
+      {seqEnd && <>
+        <p>This food can finish off:</p>
+        <SeqElemList sequences={seqEnd}/>
+      </>}
+    </div>
+  ), [seqElem, seqEnd]);
 
-  const { visible, popupRef, parentRef } = usePopupTrigger<HTMLDivElement>(
-    'above',
-    tooltipContent
-  );
+  const popup = usePopupTrigger<HTMLSpanElement>();
 
   return <>
-    <span className='recipe_info-icon' ref={parentRef}>
+    <span className='recipe_info-icon' ref={popup.triggerRef}>
       <FoodSequenceIcon/>
     </span>
-    {visible && createPortal(
-      <div className='popup popup--foodseq' ref={popupRef}>
-        {tooltipContent}
-      </div>,
-      getPopupRoot()
-    )}
+    <Popup {...popup}>
+      {tooltipContent}
+    </Popup>
   </>;
 });
 

@@ -14,7 +14,7 @@ import { ConfirmButton } from '../confirm-button';
 import { useGameData } from '../context';
 import { useUniqueId } from '../helpers';
 import { ArrowLeftIcon, SaveIcon } from '../icons';
-import { getPopupRoot } from '../popup-impl';
+import { getPopupRoot } from '../popup';
 import { Tooltip } from '../tooltip';
 import { useUrl } from '../url';
 import { DiscardChangesDialog } from './discard-changes-dialog';

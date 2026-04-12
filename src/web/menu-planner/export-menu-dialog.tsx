@@ -4,7 +4,7 @@ import { FocusTrap } from '../focus';
 import { tryCopyToClipboard } from '../helpers';
 import { CloseIcon, CopyIcon } from '../icons';
 import { Overlay } from '../overlay';
-import { getPopupRoot } from '../popup-impl';
+import { getPopupRoot } from '../popup';
 import { Tooltip } from '../tooltip';
 
 export interface ExportMenuDialogProps {
