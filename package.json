@@ -2,7 +2,7 @@
   "name": "ss14-cookbook",
   "private": true,
   "scripts": {
-    "build": "env-cmd rollup -c",
+    "build": "env-cmd -f .env.development rollup -c",
     "gen:recipes": "node ./bin/recipe-gen.js sources.yml",
     "diff:recipes": "node ./bin/recipe-diff.js",
     "watch": "env-cmd -f .env.development -- rollup -c --watch",
